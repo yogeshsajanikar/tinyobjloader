@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Tiny obj loader by syoyo</title>
     <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script src="javascripts/respond.js"></script>
     <!--[if lt IE 9]>
@@ -28,126 +28,251 @@
       </div><!-- end header -->
 
     <div class="wrapper">
+
       <section>
         <div id="title">
           <h1>Tiny obj loader</h1>
           <p>Tiny but powerful single file wavefront obj loader</p>
           <hr>
           <span class="credits left">Project maintained by <a href="https://github.com/syoyo">syoyo</a></span>
-          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
         </div>
 
+        <h1>
+<a id="tinyobjloader" class="anchor" href="#tinyobjloader" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>tinyobjloader</h1>
 
-        <p>Tiny but poweful single file wavefront obj loader written in C++. No dependencies except for C++ STL. It can parse over 10M polygons with moderate memory and time.</p>
+<p><a href="https://gitter.im/syoyo/tinyobjloader?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://badges.gitter.im/Join%20Chat.svg" alt="Join the chat at https://gitter.im/syoyo/tinyobjloader"></a></p>
 
-        <p>A great .obj loader for embedding into your (global illumination) renderer ;-)</p>
-        
-        <p><a href="http://syoyo.github.io/tinyobjloader/">http://syoyo.github.io/tinyobjloader/</a></p>
+<p><a href="https://travis-ci.org/syoyo/tinyobjloader"><img src="https://travis-ci.org/syoyo/tinyobjloader.svg" alt="Build Status"></a></p>
 
-        <h2>Features</h2>
+<p><a href="https://app.wercker.com/project/bykey/495a3bac400212cdacdeb4dd9397bf4f"><img src="https://app.wercker.com/status/495a3bac400212cdacdeb4dd9397bf4f/m" alt="wercker status" title="wercker status"></a></p>
 
-        <ul>
-          <li>Groups</li>
-          <li>Indices</li>
-          <li>Vertices</li>
-          <li>Texcoords</li>
-          <li>Normals</li>
-          <li>Materials
-            <ul>
-              <li>Per-face materials.</li>
-              <li>Unknown material attributes are treated as key-value.</li>
-            </ul>
-          </li>
-        </ul>
-        
-        <h2>Example</h2>
+<p><a href="https://ci.appveyor.com/project/syoyo/tinyobjloader/branch/master"><img src="https://ci.appveyor.com/api/projects/status/tlb421q3t2oyobcn/branch/master?svg=true" alt="Build status"></a></p>
 
-        <p>tinyobjloader can successfully load the Rungholt scene with 6M triangles.<br>
+<p><a href="https://coveralls.io/github/syoyo/tinyobjloader?branch=master"><img src="https://coveralls.io/repos/github/syoyo/tinyobjloader/badge.svg?branch=master" alt="Coverage Status"></a></p>
 
-        Source: <a href="http://graphics.cs.williams.edu/data/meshes.xml">http://graphics.cs.williams.edu/data/meshes.xml</a></p>
-          
-        <p><img src="https://github.com/syoyo/tinyobjloader/blob/master/images/rungholt.jpg?raw=true" alt="Rungholt"></p>
+<p><a href="http://syoyo.github.io/tinyobjloader/">http://syoyo.github.io/tinyobjloader/</a></p>
 
-        <h2>Usage</h2>
+<p>Tiny but powerful single file wavefront obj loader written in C++. No dependency except for C++ STL. It can parse 10M over polygons with moderate memory and time.</p>
 
-        <p>First, load your mesh from file, storing the shapes and materials separately.</p>
+<p><code>tinyobjloader</code> is good for embedding .obj loader to your (global illumination) renderer ;-)</p>
 
-<pre><code>std::string inputfile = "cornell_box.obj";
-std::vector&lt;tinyobj::shape_t&gt; shapes;
-std::vector&lt;tinyobj::material_t&gt; materials;
+<h2>
+<a id="notice" class="anchor" href="#notice" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Notice!</h2>
+
+<p><code>master</code> branch will be replaced with <code>develop</code> branch in the near future: <a href="https://github.com/syoyo/tinyobjloader/tree/develop">https://github.com/syoyo/tinyobjloader/tree/develop</a>
+<code>develop</code> branch has more better support and clean API interface for loading .obj and also it has optimized multi-threaded parser(probably 10x faster than <code>master</code>). If you are new to use <code>TinyObjLoader</code>, I highly recommend to use <code>develop</code> branch.</p>
+
+<h2>
+<a id="whats-new" class="anchor" href="#whats-new" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What's new</h2>
+
+<ul>
+<li>Mar 13, 2016 : Introduce <code>load_flag_t</code> and flat normal calculation flag! Thanks Vazquinhos!</li>
+<li>Jan 29, 2016 : Support n-polygon(no triangulation) and OpenSubdiv crease tag! Thanks dboogert!</li>
+<li>Nov 26, 2015 : Now single-header only!.</li>
+<li>Nov 08, 2015 : Improved API.</li>
+<li>Jun 23, 2015 : Various fixes and added more projects using tinyobjloader. Thanks many contributors!</li>
+<li>Mar 03, 2015 : Replace atof() with hand-written parser for robust reading of numeric value. Thanks skurmedel!</li>
+<li>Feb 06, 2015 : Fix parsing multi-material object</li>
+<li>Sep 14, 2014 : Add support for multi-material per object/group. Thanks Mykhailo!</li>
+<li>Mar 17, 2014 : Fixed trim newline bugs. Thanks ardneran!</li>
+<li>Apr 29, 2014 : Add API to read .obj from std::istream. Good for reading compressed .obj or connecting to procedural primitive generator. Thanks burnse!</li>
+<li>Apr 21, 2014 : Define default material if no material definition exists in .obj. Thanks YarmUI!</li>
+<li>Apr 10, 2014 : Add support for parsing 'illum' and 'd'/'Tr' statements. Thanks mmp!</li>
+<li>Jan 27, 2014 : Added CMake project. Thanks bradc6!</li>
+<li>Nov 26, 2013 : Performance optimization by NeuralSandwich. 9% improvement in his project, thanks!</li>
+<li>Sep 12, 2013 : Added multiple .obj sticher example.</li>
+</ul>
+
+<h2>
+<a id="example" class="anchor" href="#example" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h2>
+
+<p><img src="https://github.com/syoyo/tinyobjloader/blob/master/images/rungholt.jpg?raw=true" alt="Rungholt"></p>
+
+<p>tinyobjloader can successfully load 6M triangles Rungholt scene.
+<a href="http://graphics.cs.williams.edu/data/meshes.xml">http://graphics.cs.williams.edu/data/meshes.xml</a></p>
+
+<h2>
+<a id="use-case" class="anchor" href="#use-case" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Use case</h2>
+
+<p>TinyObjLoader is successfully used in ...</p>
+
+<ul>
+<li>bullet3 <a href="https://github.com/erwincoumans/bullet3">https://github.com/erwincoumans/bullet3</a>
+</li>
+<li>pbrt-v2 <a href="https://github.com/mmp/pbrt-v2">https://github.com/mmp/pbrt-v2</a>
+</li>
+<li>OpenGL game engine development <a href="http://swarminglogic.com/jotting/2013_10_gamedev01">http://swarminglogic.com/jotting/2013_10_gamedev01</a>
+</li>
+<li>mallie <a href="https://lighttransport.github.io/mallie">https://lighttransport.github.io/mallie</a>
+</li>
+<li>IBLBaker (Image Based Lighting Baker). <a href="http://www.derkreature.com/iblbaker/">http://www.derkreature.com/iblbaker/</a>
+</li>
+<li>Stanford CS148 <a href="http://web.stanford.edu/class/cs148/assignments/assignment3.pdf">http://web.stanford.edu/class/cs148/assignments/assignment3.pdf</a>
+</li>
+<li>Awesome Bump <a href="http://awesomebump.besaba.com/about/">http://awesomebump.besaba.com/about/</a>
+</li>
+<li>sdlgl3-wavefront OpenGL .obj viewer <a href="https://github.com/chrisliebert/sdlgl3-wavefront">https://github.com/chrisliebert/sdlgl3-wavefront</a>
+</li>
+<li>pbrt-v3 <a href="https://github.com/mmp/pbrt-v3">https://github.com/mmp/pbrt-v3</a>
+</li>
+<li>cocos2d-x <a href="https://github.com/cocos2d/cocos2d-x/">https://github.com/cocos2d/cocos2d-x/</a>
+</li>
+<li>Android Vulkan demo <a href="https://github.com/SaschaWillems/Vulkan">https://github.com/SaschaWillems/Vulkan</a>
+</li>
+<li>voxelizer <a href="https://github.com/karimnaaji/voxelizer">https://github.com/karimnaaji/voxelizer</a>
+</li>
+<li>Probulator <a href="https://github.com/kayru/Probulator">https://github.com/kayru/Probulator</a>
+</li>
+<li>OptiX Prime baking <a href="https://github.com/nvpro-samples/optix_prime_baking">https://github.com/nvpro-samples/optix_prime_baking</a>
+</li>
+<li>FireRays SDK <a href="https://github.com/GPUOpen-LibrariesAndSDKs/FireRays_SDK">https://github.com/GPUOpen-LibrariesAndSDKs/FireRays_SDK</a>
+</li>
+<li>parg, tiny C library of various graphics utilities and GL demos <a href="https://github.com/prideout/parg">https://github.com/prideout/parg</a>
+</li>
+<li>Opengl unit of ChronoEngine <a href="https://github.com/projectchrono/chrono-opengl">https://github.com/projectchrono/chrono-opengl</a>
+</li>
+<li>Your project here!</li>
+</ul>
+
+<h2>
+<a id="features" class="anchor" href="#features" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Features</h2>
+
+<ul>
+<li>Group(parse multiple group name)</li>
+<li>Vertex</li>
+<li>Texcoord</li>
+<li>Normal</li>
+<li>Material
+
+<ul>
+<li>Unknown material attributes are returned as key-value(value is string) map.</li>
+</ul>
+</li>
+<li>Crease tag('t'). This is OpenSubdiv specific(not in wavefront .obj specification)</li>
+</ul>
+
+<h2>
+<a id="todo" class="anchor" href="#todo" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>TODO</h2>
+
+<ul>
+<li>[ ] Support different indices for vertex/normal/texcoord</li>
+</ul>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
+
+<p>Licensed under 2 clause BSD.</p>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>TinyObjLoader triangulate input .obj by default.</p>
+
+<div class="highlight highlight-source-c++"><pre>#<span class="pl-k">define</span> <span class="pl-en">TINYOBJLOADER_IMPLEMENTATION</span> <span class="pl-c">// define this in only *one* .cc</span>
+#<span class="pl-k">include</span> <span class="pl-s"><span class="pl-pds">"</span>tiny_obj_loader.h<span class="pl-pds">"</span></span>
+
+std::string inputfile = <span class="pl-s"><span class="pl-pds">"</span>cornell_box.obj<span class="pl-pds">"</span></span>;
+std::vector&lt;tinyobj::<span class="pl-c1">shape_t</span>&gt; shapes;
+std::vector&lt;tinyobj::<span class="pl-c1">material_t</span>&gt; materials;
+
 std::string err;
+<span class="pl-k">bool</span> ret = tinyobj::LoadObj(shapes, materials, err, inputfile.c_str());
 
-if(!tinyobj::LoadObj(shapes, materials, err, inputfile.c_str()))
-	std::cerr << err << std::endl;
+<span class="pl-k">if</span> (!err.empty()) { <span class="pl-c">// `err` may contain warning message.</span>
+  std::cerr &lt;&lt; err &lt;&lt; std::endl;
 }
 
-std::cout << "# of shapes    : " << shapes.size() << std::endl;
-std::cout << "# of materials : " << materials.size() << std::endl;
-</code></pre>
+<span class="pl-k">if</span> (!ret) {
+  <span class="pl-c1">exit</span>(<span class="pl-c1">1</span>);
+}
 
-<p>Now that you have loaded the shape and material data from file, you can iterate through each vector to get the information that you need.</p>
-<p>Each shape will contain vertex indices, positions, normals, UV coordinates and per-face material IDs.</p>
+std::cout &lt;&lt; <span class="pl-s"><span class="pl-pds">"</span># of shapes    : <span class="pl-pds">"</span></span> &lt;&lt; shapes.size() &lt;&lt; std::endl;
+std::cout &lt;&lt; <span class="pl-s"><span class="pl-pds">"</span># of materials : <span class="pl-pds">"</span></span> &lt;&lt; materials.size() &lt;&lt; std::endl;
 
-<pre><code>for (size_t i = 0; i < shapes.size(); i++) {
-  printf("shape[%ld].name = %s\n", i, shapes[i].name.c_str());
-  printf("Size of shape[%ld].indices: %ld\n", i, shapes[i].mesh.indices.size());
-  printf("Size of shape[%ld].material_ids: %ld\n", i, shapes[i].mesh.material_ids.size());
-  assert((shapes[i].mesh.indices.size() % 3) == 0);
-  for (size_t f = 0; f < shapes[i].mesh.indices.size() / 3; f++) {
-    printf("  idx[%ld] = %d, %d, %d. mat_id = %d\n", f, shapes[i].mesh.indices[3*f+0], shapes[i].mesh.indices[3*f+1], shapes[i].mesh.indices[3*f+2], shapes[i].mesh.material_ids[f]);
+<span class="pl-k">for</span> (<span class="pl-c1">size_t</span> i = <span class="pl-c1">0</span>; i &lt; shapes.size(); i++) {
+  <span class="pl-c1">printf</span>(<span class="pl-s"><span class="pl-pds">"</span>shape[<span class="pl-c1">%ld</span>].name = <span class="pl-c1">%s</span><span class="pl-cce">\n</span><span class="pl-pds">"</span></span>, i, shapes[i].<span class="pl-smi">name</span>.<span class="pl-c1">c_str</span>());
+  <span class="pl-c1">printf</span>(<span class="pl-s"><span class="pl-pds">"</span>Size of shape[<span class="pl-c1">%ld</span>].indices: <span class="pl-c1">%ld</span><span class="pl-cce">\n</span><span class="pl-pds">"</span></span>, i, shapes[i].<span class="pl-smi">mesh</span>.<span class="pl-smi">indices</span>.<span class="pl-c1">size</span>());
+  <span class="pl-c1">printf</span>(<span class="pl-s"><span class="pl-pds">"</span>Size of shape[<span class="pl-c1">%ld</span>].material_ids: <span class="pl-c1">%ld</span><span class="pl-cce">\n</span><span class="pl-pds">"</span></span>, i, shapes[i].<span class="pl-smi">mesh</span>.<span class="pl-smi">material_ids</span>.<span class="pl-c1">size</span>());
+  <span class="pl-c1">assert</span>((shapes[i].<span class="pl-smi">mesh</span>.<span class="pl-smi">indices</span>.<span class="pl-c1">size</span>() % <span class="pl-c1">3</span>) == <span class="pl-c1">0</span>);
+  <span class="pl-k">for</span> (<span class="pl-c1">size_t</span> f = <span class="pl-c1">0</span>; f &lt; shapes[i].<span class="pl-smi">mesh</span>.<span class="pl-smi">indices</span>.<span class="pl-c1">size</span>() / <span class="pl-c1">3</span>; f++) {
+    <span class="pl-c1">printf</span>(<span class="pl-s"><span class="pl-pds">"</span>  idx[<span class="pl-c1">%ld</span>] = <span class="pl-c1">%d</span>, <span class="pl-c1">%d</span>, <span class="pl-c1">%d</span>. mat_id = <span class="pl-c1">%d</span><span class="pl-cce">\n</span><span class="pl-pds">"</span></span>, f, shapes[i].<span class="pl-smi">mesh</span>.<span class="pl-smi">indices</span>[<span class="pl-c1">3</span>*f+<span class="pl-c1">0</span>], shapes[i].<span class="pl-smi">mesh</span>.<span class="pl-smi">indices</span>[<span class="pl-c1">3</span>*f+<span class="pl-c1">1</span>], shapes[i].<span class="pl-smi">mesh</span>.<span class="pl-smi">indices</span>[<span class="pl-c1">3</span>*f+<span class="pl-c1">2</span>], shapes[i].<span class="pl-smi">mesh</span>.<span class="pl-smi">material_ids</span>[f]);
   }
 
-  printf("shape[%ld].vertices: %ld\n", i, shapes[i].mesh.positions.size());
-  assert((shapes[i].mesh.positions.size() % 3) == 0);
-  for (size_t v = 0; v < shapes[i].mesh.positions.size() / 3; v++) {
-    printf("  v[%ld] = (%f, %f, %f)\n", v,
-      shapes[i].mesh.positions[3*v+0],
-      shapes[i].mesh.positions[3*v+1],
-      shapes[i].mesh.positions[3*v+2]);
+  <span class="pl-c1">printf</span>(<span class="pl-s"><span class="pl-pds">"</span>shape[<span class="pl-c1">%ld</span>].vertices: <span class="pl-c1">%ld</span><span class="pl-cce">\n</span><span class="pl-pds">"</span></span>, i, shapes[i].<span class="pl-smi">mesh</span>.<span class="pl-smi">positions</span>.<span class="pl-c1">size</span>());
+  <span class="pl-c1">assert</span>((shapes[i].<span class="pl-smi">mesh</span>.<span class="pl-smi">positions</span>.<span class="pl-c1">size</span>() % <span class="pl-c1">3</span>) == <span class="pl-c1">0</span>);
+  <span class="pl-k">for</span> (<span class="pl-c1">size_t</span> v = <span class="pl-c1">0</span>; v &lt; shapes[i].<span class="pl-smi">mesh</span>.<span class="pl-smi">positions</span>.<span class="pl-c1">size</span>() / <span class="pl-c1">3</span>; v++) {
+    <span class="pl-c1">printf</span>(<span class="pl-s"><span class="pl-pds">"</span>  v[<span class="pl-c1">%ld</span>] = (<span class="pl-c1">%f</span>, <span class="pl-c1">%f</span>, <span class="pl-c1">%f</span>)<span class="pl-cce">\n</span><span class="pl-pds">"</span></span>, v,
+      shapes[i].<span class="pl-smi">mesh</span>.<span class="pl-smi">positions</span>[<span class="pl-c1">3</span>*v+<span class="pl-c1">0</span>],
+      shapes[i].<span class="pl-smi">mesh</span>.<span class="pl-smi">positions</span>[<span class="pl-c1">3</span>*v+<span class="pl-c1">1</span>],
+      shapes[i].<span class="pl-smi">mesh</span>.<span class="pl-smi">positions</span>[<span class="pl-c1">3</span>*v+<span class="pl-c1">2</span>]);
   }
-}</pre></code>
+}
 
-<p>The per-face material IDs can be used to reference the materials in the materials vector.</p>
-
-<pre><code>for (size_t i = 0; i < materials.size(); i++) {
-  printf("material[%ld].name = %s\n", i, materials[i].name.c_str());
-  printf("  material.Ka = (%f, %f ,%f)\n", materials[i].ambient[0], materials[i].ambient[1], materials[i].ambient[2]);
-  printf("  material.Kd = (%f, %f ,%f)\n", materials[i].diffuse[0], materials[i].diffuse[1], materials[i].diffuse[2]);
-  printf("  material.Ks = (%f, %f ,%f)\n", materials[i].specular[0], materials[i].specular[1], materials[i].specular[2]);
-  printf("  material.Tr = (%f, %f ,%f)\n", materials[i].transmittance[0], materials[i].transmittance[1], materials[i].transmittance[2]);
-  printf("  material.Ke = (%f, %f ,%f)\n", materials[i].emission[0], materials[i].emission[1], materials[i].emission[2]);
-  printf("  material.Ns = %f\n", materials[i].shininess);
-  printf("  material.Ni = %f\n", materials[i].ior);
-  printf("  material.dissolve = %f\n", materials[i].dissolve);
-  printf("  material.illum = %d\n", materials[i].illum);
-  printf("  material.map_Ka = %s\n", materials[i].ambient_texname.c_str());
-  printf("  material.map_Kd = %s\n", materials[i].diffuse_texname.c_str());
-  printf("  material.map_Ks = %s\n", materials[i].specular_texname.c_str());
-  printf("  material.map_Ns = %s\n", materials[i].normal_texname.c_str());
-  std::map<std::string, std::string>::const_iterator it(materials[i].unknown_parameter.begin());
-  std::map<std::string, std::string>::const_iterator itEnd(materials[i].unknown_parameter.end());
-  for (; it != itEnd; it++) {
-    printf("  material.%s = %s\n", it->first.c_str(), it->second.c_str());
+<span class="pl-k">for</span> (<span class="pl-c1">size_t</span> i = <span class="pl-c1">0</span>; i &lt; materials.size(); i++) {
+  <span class="pl-c1">printf</span>(<span class="pl-s"><span class="pl-pds">"</span>material[<span class="pl-c1">%ld</span>].name = <span class="pl-c1">%s</span><span class="pl-cce">\n</span><span class="pl-pds">"</span></span>, i, materials[i].<span class="pl-smi">name</span>.<span class="pl-c1">c_str</span>());
+  <span class="pl-c1">printf</span>(<span class="pl-s"><span class="pl-pds">"</span>  material.Ka = (<span class="pl-c1">%f</span>, <span class="pl-c1">%f</span> ,<span class="pl-c1">%f</span>)<span class="pl-cce">\n</span><span class="pl-pds">"</span></span>, materials[i].<span class="pl-smi">ambient</span>[<span class="pl-c1">0</span>], materials[i].<span class="pl-smi">ambient</span>[<span class="pl-c1">1</span>], materials[i].<span class="pl-smi">ambient</span>[<span class="pl-c1">2</span>]);
+  <span class="pl-c1">printf</span>(<span class="pl-s"><span class="pl-pds">"</span>  material.Kd = (<span class="pl-c1">%f</span>, <span class="pl-c1">%f</span> ,<span class="pl-c1">%f</span>)<span class="pl-cce">\n</span><span class="pl-pds">"</span></span>, materials[i].<span class="pl-smi">diffuse</span>[<span class="pl-c1">0</span>], materials[i].<span class="pl-smi">diffuse</span>[<span class="pl-c1">1</span>], materials[i].<span class="pl-smi">diffuse</span>[<span class="pl-c1">2</span>]);
+  <span class="pl-c1">printf</span>(<span class="pl-s"><span class="pl-pds">"</span>  material.Ks = (<span class="pl-c1">%f</span>, <span class="pl-c1">%f</span> ,<span class="pl-c1">%f</span>)<span class="pl-cce">\n</span><span class="pl-pds">"</span></span>, materials[i].<span class="pl-smi">specular</span>[<span class="pl-c1">0</span>], materials[i].<span class="pl-smi">specular</span>[<span class="pl-c1">1</span>], materials[i].<span class="pl-smi">specular</span>[<span class="pl-c1">2</span>]);
+  <span class="pl-c1">printf</span>(<span class="pl-s"><span class="pl-pds">"</span>  material.Tr = (<span class="pl-c1">%f</span>, <span class="pl-c1">%f</span> ,<span class="pl-c1">%f</span>)<span class="pl-cce">\n</span><span class="pl-pds">"</span></span>, materials[i].<span class="pl-smi">transmittance</span>[<span class="pl-c1">0</span>], materials[i].<span class="pl-smi">transmittance</span>[<span class="pl-c1">1</span>], materials[i].<span class="pl-smi">transmittance</span>[<span class="pl-c1">2</span>]);
+  <span class="pl-c1">printf</span>(<span class="pl-s"><span class="pl-pds">"</span>  material.Ke = (<span class="pl-c1">%f</span>, <span class="pl-c1">%f</span> ,<span class="pl-c1">%f</span>)<span class="pl-cce">\n</span><span class="pl-pds">"</span></span>, materials[i].<span class="pl-smi">emission</span>[<span class="pl-c1">0</span>], materials[i].<span class="pl-smi">emission</span>[<span class="pl-c1">1</span>], materials[i].<span class="pl-smi">emission</span>[<span class="pl-c1">2</span>]);
+  <span class="pl-c1">printf</span>(<span class="pl-s"><span class="pl-pds">"</span>  material.Ns = <span class="pl-c1">%f</span><span class="pl-cce">\n</span><span class="pl-pds">"</span></span>, materials[i].<span class="pl-smi">shininess</span>);
+  <span class="pl-c1">printf</span>(<span class="pl-s"><span class="pl-pds">"</span>  material.Ni = <span class="pl-c1">%f</span><span class="pl-cce">\n</span><span class="pl-pds">"</span></span>, materials[i].<span class="pl-smi">ior</span>);
+  <span class="pl-c1">printf</span>(<span class="pl-s"><span class="pl-pds">"</span>  material.dissolve = <span class="pl-c1">%f</span><span class="pl-cce">\n</span><span class="pl-pds">"</span></span>, materials[i].<span class="pl-smi">dissolve</span>);
+  <span class="pl-c1">printf</span>(<span class="pl-s"><span class="pl-pds">"</span>  material.illum = <span class="pl-c1">%d</span><span class="pl-cce">\n</span><span class="pl-pds">"</span></span>, materials[i].<span class="pl-smi">illum</span>);
+  <span class="pl-c1">printf</span>(<span class="pl-s"><span class="pl-pds">"</span>  material.map_Ka = <span class="pl-c1">%s</span><span class="pl-cce">\n</span><span class="pl-pds">"</span></span>, materials[i].<span class="pl-smi">ambient_texname</span>.<span class="pl-c1">c_str</span>());
+  <span class="pl-c1">printf</span>(<span class="pl-s"><span class="pl-pds">"</span>  material.map_Kd = <span class="pl-c1">%s</span><span class="pl-cce">\n</span><span class="pl-pds">"</span></span>, materials[i].<span class="pl-smi">diffuse_texname</span>.<span class="pl-c1">c_str</span>());
+  <span class="pl-c1">printf</span>(<span class="pl-s"><span class="pl-pds">"</span>  material.map_Ks = <span class="pl-c1">%s</span><span class="pl-cce">\n</span><span class="pl-pds">"</span></span>, materials[i].<span class="pl-smi">specular_texname</span>.<span class="pl-c1">c_str</span>());
+  <span class="pl-c1">printf</span>(<span class="pl-s"><span class="pl-pds">"</span>  material.map_Ns = <span class="pl-c1">%s</span><span class="pl-cce">\n</span><span class="pl-pds">"</span></span>, materials[i].<span class="pl-smi">specular_highlight_texname</span>.<span class="pl-c1">c_str</span>());
+  std::map&lt;std::string, std::string&gt;::const_iterator <span class="pl-smi">it</span>(materials[i].<span class="pl-smi">unknown_parameter</span>.<span class="pl-c1">begin</span>());
+  std::map&lt;std::string, std::string&gt;::const_iterator <span class="pl-smi">itEnd</span>(materials[i].<span class="pl-smi">unknown_parameter</span>.<span class="pl-c1">end</span>());
+  <span class="pl-k">for</span> (; it != itEnd; it++) {
+    <span class="pl-c1">printf</span>(<span class="pl-s"><span class="pl-pds">"</span>  material.<span class="pl-c1">%s</span> = <span class="pl-c1">%s</span><span class="pl-cce">\n</span><span class="pl-pds">"</span></span>, it-&gt;first.<span class="pl-c1">c_str</span>(), it-&gt;second.<span class="pl-c1">c_str</span>());
   }
-  printf("\n");
-}</code></pre>
+  <span class="pl-c1">printf</span>(<span class="pl-s"><span class="pl-pds">"</span><span class="pl-cce">\n</span><span class="pl-pds">"</span></span>);
+}</pre></div>
 
-        <h2>Notes</h2>
+<p>Reading .obj without triangulation. Use <code>num_vertices[i]</code> to iterate over faces(indices). <code>num_vertices[i]</code> stores the number of vertices for ith face.</p>
 
-        <ul>
-          <li>Polygons are converted into triangles.</li>
-          <li>You must specify the directory location of your material file as the 4th parameter of LoadObj() if your materials are not in the working directory of the application.</li>
-          <ul>
-            <li>Example:<code>LoadObj(shapes, materials, inputfile.c_str(), "/materials") </code></li>
-          </ul>
-        </ul>
-        
-        <footer>
-          <p>Licensed under 2 clause BSD.</p>
-        </footer>
+<div class="highlight highlight-source-c++"><pre>#<span class="pl-k">define</span> <span class="pl-en">TINYOBJLOADER_IMPLEMENTATION</span> <span class="pl-c">// define this in only *one* .cc</span>
+#<span class="pl-k">include</span> <span class="pl-s"><span class="pl-pds">"</span>tiny_obj_loader.h<span class="pl-pds">"</span></span>
+
+std::string inputfile = <span class="pl-s"><span class="pl-pds">"</span>cornell_box.obj<span class="pl-pds">"</span></span>;
+std::vector&lt;tinyobj::<span class="pl-c1">shape_t</span>&gt; shapes;
+std::vector&lt;tinyobj::<span class="pl-c1">material_t</span>&gt; materials;
+
+std::string err;
+<span class="pl-k">int</span> flags = <span class="pl-c1">1</span>; <span class="pl-c">// see load_flags_t enum for more information.</span>
+<span class="pl-k">bool</span> ret = tinyobj::LoadObj(shapes, materials, err, inputfile.c_str(), flags);
+
+<span class="pl-k">if</span> (!err.empty()) { <span class="pl-c">// `err` may contain warning message.</span>
+  std::cerr &lt;&lt; err &lt;&lt; std::endl;
+}
+
+<span class="pl-k">if</span> (!ret) {
+  <span class="pl-c1">exit</span>(<span class="pl-c1">1</span>);
+}
+
+<span class="pl-k">for</span> (<span class="pl-c1">size_t</span> i = <span class="pl-c1">0</span>; i &lt; shapes.size(); i++) {
+
+  <span class="pl-c1">size_t</span> indexOffset = <span class="pl-c1">0</span>;
+  <span class="pl-k">for</span> (<span class="pl-c1">size_t</span> n = <span class="pl-c1">0</span>; n &lt; shapes[i].<span class="pl-smi">mesh</span>.<span class="pl-smi">num_vertices</span>.<span class="pl-c1">size</span>(); n++) {
+    <span class="pl-k">int</span> ngon = shapes[i].<span class="pl-smi">mesh</span>.<span class="pl-smi">num_vertices</span>[n];
+    <span class="pl-k">for</span> (<span class="pl-c1">size_t</span> f = <span class="pl-c1">0</span>; f &lt; ngon; f++) {
+      <span class="pl-k">unsigned</span> <span class="pl-k">int</span> v = shapes[i].<span class="pl-smi">mesh</span>.<span class="pl-smi">indices</span>[indexOffset + f];
+      <span class="pl-c1">printf</span>(<span class="pl-s"><span class="pl-pds">"</span>  face[<span class="pl-c1">%ld</span>] v[<span class="pl-c1">%ld</span>] = (<span class="pl-c1">%f</span>, <span class="pl-c1">%f</span>, <span class="pl-c1">%f</span>)<span class="pl-cce">\n</span><span class="pl-pds">"</span></span>, n,
+        shapes[i].<span class="pl-smi">mesh</span>.<span class="pl-smi">positions</span>[<span class="pl-c1">3</span>*v+<span class="pl-c1">0</span>],
+        shapes[i].<span class="pl-smi">mesh</span>.<span class="pl-smi">positions</span>[<span class="pl-c1">3</span>*v+<span class="pl-c1">1</span>],
+        shapes[i].<span class="pl-smi">mesh</span>.<span class="pl-smi">positions</span>[<span class="pl-c1">3</span>*v+<span class="pl-c1">2</span>]);
+
+    }
+    indexOffset += ngon;
+  }
+
+}</pre></div>
       </section>
+
     </div>
-  
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->
     
   </body>
