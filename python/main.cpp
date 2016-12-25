@@ -48,7 +48,7 @@ static PyObject* pyLoadObj(PyObject* self, PyObject* args) {
   std::string err;
   tinyobj::LoadObj(&attrib, &shapes, &materials, &err, filename, material_base);
 
-  pyshapes = PyDict_New();
+  pyshapes = PyList_New(0);
   pymaterials = PyDict_New();
   rtndict = PyDict_New();
 
@@ -79,6 +79,7 @@ static PyObject* pyLoadObj(PyObject* self, PyObject* args) {
     PyDict_SetItemString(attribobj, current_name, current);
   }
 
+  size_t shape_index = 0;
   for (std::vector<tinyobj::shape_t>::iterator shape = shapes.begin();
        shape != shapes.end(); shape++) {
     meshobj = PyDict_New();
@@ -122,7 +123,7 @@ static PyObject* pyLoadObj(PyObject* self, PyObject* args) {
       PyDict_SetItemString(meshobj, "material_ids", current);
     }
 
-    PyDict_SetItemString(pyshapes, (*shape).name.c_str(), meshobj);
+    PyList_Insert(pyshapes, shape_index++, meshobj);
   }
 
   for (std::vector<tinyobj::material_t>::iterator mat = materials.begin();

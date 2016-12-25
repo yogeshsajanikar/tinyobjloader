@@ -1610,7 +1610,7 @@ bool LoadObj(attrib_t *attrib, std::vector<shape_t> *shapes,
 
       // @todo { multiple object name? }
       token += 2;
-      auto namebuf = std::string(token);
+      std::string namebuf = std::string(token);
       name = trim(namebuf);
 
       continue;
