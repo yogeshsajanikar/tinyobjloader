@@ -43,8 +43,33 @@ THE SOFTWARE.
 #include <map>
 #include <string>
 #include <vector>
+#include <algorithm> 
+#include <functional> 
+#include <cctype>
+#include <locale>
 
 namespace tinyobj {
+
+  // Internal utilities 
+  // trim from start
+  static inline std::string &ltrim(std::string &s) {
+    s.erase(s.begin(), std::find_if(s.begin(), s.end(),
+                                    std::not1(std::ptr_fun<int, int>(std::isspace))));
+    return s;
+  }
+
+  // trim from end
+  static inline std::string &rtrim(std::string &s) {
+    s.erase(std::find_if(s.rbegin(), s.rend(),
+                         std::not1(std::ptr_fun<int, int>(std::isspace))).base(), s.end());
+    return s;
+  }
+
+  // trim from both ends
+  static inline std::string &trim(std::string &s) {
+    return ltrim(rtrim(s));
+  }
+
 
 // https://en.wikipedia.org/wiki/Wavefront_.obj_file says ...
 //
@@ -1584,14 +1609,9 @@ bool LoadObj(attrib_t *attrib, std::vector<shape_t> *shapes,
       shape = shape_t();
 
       // @todo { multiple object name? }
-      char namebuf[TINYOBJ_SSCANF_BUFFER_SIZE];
       token += 2;
-#ifdef _MSC_VER
-      sscanf_s(token, "%s", namebuf, (unsigned)_countof(namebuf));
-#else
-      sscanf(token, "%s", namebuf);
-#endif
-      name = std::string(namebuf);
+      auto namebuf = std::string(token);
+      name = trim(namebuf);
 
       continue;
     }
