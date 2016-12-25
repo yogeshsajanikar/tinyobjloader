@@ -33,6 +33,7 @@ static PyObject* pyLoadObj(PyObject* self, PyObject* args) {
 
   char const* current_name;
   char const* filename;
+  char const* material_base = NULL;
   vectd vect;
   std::vector<tinyobj::index_t> indices;
   std::vector<unsigned char> face_verts;
@@ -41,10 +42,11 @@ static PyObject* pyLoadObj(PyObject* self, PyObject* args) {
   std::vector<tinyobj::shape_t> shapes;
   std::vector<tinyobj::material_t> materials;
 
-  if (!PyArg_ParseTuple(args, "s", &filename)) return NULL;
+  if (!PyArg_ParseTuple(args, "s|s", &filename, &material_base))
+    return NULL;
 
   std::string err;
-  tinyobj::LoadObj(&attrib, &shapes, &materials, &err, filename);
+  tinyobj::LoadObj(&attrib, &shapes, &materials, &err, filename, material_base);
 
   pyshapes = PyDict_New();
   pymaterials = PyDict_New();
